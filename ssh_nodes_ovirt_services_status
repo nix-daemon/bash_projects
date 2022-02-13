@@ -1,0 +1,7 @@
+#!/bin/bash
+#This script attempts to ssh into node0 and sends commands to echo the hostname, returns the status of the ovirt-ha-broker service, returns the status of the ovirt-ha-agent, and then exits and moves onto the next node, up to node2. If you have a RHEV cluster bigger than three nodes, you can add node names to the list.
+for node in {node0,node1,node2}
+do
+echo Attempting to ssh into $node
+sudo ssh $node 'echo Sucessfully logged into $(hostname); echo ovirt-ha-broker status:; systemctl status ovirt-ha-broker | grep -o Active:.................; echo ovirt-ha-agent status; systemctl status ovirt-ha-agent | grep -o Active:.................'
+done
