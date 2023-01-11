@@ -1,0 +1,10 @@
+#!/bin/bash
+#This bash script attempts to ssh into node0. Upon success, it then issues a command to start the ovirt-ha-broker and ovirt-ha-agent and continues to the next node, stopping at node2. The script then attemts to ssh back into node0 to bring the hosted engine back out of maintenance mode. You can add nodes to the list as required if you have a RHEV cluster bigger than 3 nodes.
+for node in {node0,node1,node2}
+do
+echo Attempting to ssh into $node
+sudo ssh $node 'echo Successfully logged into $(hostname);echo starting ovirt-ha-broker; systemctl start ovirt-ha-broker; echo starting ovirt-ha-agent; systemctl start ovirt-ha-agent'
+done
+echo Attempting to ssh to node0 to remove hosted engine from maintenance mode
+sudo ssh node0 'echo Successfuly logged into $(hostname); echo Attempting to bring the hosted engine out of maintenance mode; hosted-engine --set-maintenance --mode=none'
+firefox 'https://engine.74cpt.cpb.mil'
