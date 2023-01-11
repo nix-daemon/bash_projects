@@ -1,0 +1,4 @@
+#!/bin/bash
+#This bash script attempts to ssh into node0 and upon success prints out the list of gluster volumes, and then attempts to start each gluster volume
+echo Attempting to ssh into node0
+sudo ssh node0 'echo Successfully logged into $(hostname); echo Attempting to get a list of gluster volumes and start them; for volume in $(gluster volume list); do gluster volume start $volume; done'
