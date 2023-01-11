@@ -1,3 +1,0 @@
-#!/bin/bash
-#This bash script attempts to ssh into node0 and upon sucess returns the list of gluster volumes which it then uses to get a status on each gluster volume
-sudo ssh node0 'echo Successfully logged into $(hostname); echo Attempting to get a list of gluster volumes and return their status; for volume in $(gluster volume list); do gluster volume status $volume; done'
