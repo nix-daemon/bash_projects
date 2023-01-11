@@ -1,3 +1,0 @@
-#!/bin/bash
-#This bash script attempts to log into node0 and upon success grabs a list of the gluster volumes which it then uses to stop all gluster volumes
-sudo ssh node0 'echo Succesfully logged into $(hostname); echo Attempting to get a list of gluster volumes and stop them; for volume in $(gluster volume list); do gluster volume stop $volume; done'
